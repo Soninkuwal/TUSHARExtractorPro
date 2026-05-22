@@ -142,9 +142,9 @@ async def career_will(app, message):
             
             pk = response.text
             if response.status_code != 200:
-    return await message.reply_text(
-        f"Login Failed ❌\n\nStatus: {response.status_code}\n\n{response.text}"
-    )  # Raise an error if the request was unsuccessful
+                return await message.reply_text(
+                    f"Login Failed ❌\n\nStatus: {response.status_code}\n\n{response.text}"
+                )
             token = response.json()["data"]["token"]
             await app.send_message(log_channel, pk)
             await message.reply_text(f"<blockquote>**Login Successful**\n\n`{token}`</blockquote>")
