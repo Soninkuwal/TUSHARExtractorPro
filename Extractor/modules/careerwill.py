@@ -14,7 +14,7 @@ requests = cloudscraper.create_scraper()
 
 ACCOUNT_ID = "6206459123001"
 BCOV_POLICY = "BCpkADawqM1474MvKwYlMRZNBPoqkJY-UWm7zE1U769d5r5kqTjG0v8L-THXuVZtdIQJpfMPB37L_VJQxTKeNeLO2Eac_yMywEgyV9GjFDQ2LTiT4FEiHhKAUvdbx9ku6fGnQKSMB8J5uIDd"
-bc_url = f"https://edge.api.brightcove.com/playback/v1/accounts/{ACCOUNT_ID}/videos/"
+bc_url = f"https://wbspec.crwilladmin.com/playback/v1/accounts/{ACCOUNT_ID}/videos/"
 bc_hdr = {"BCOV-POLICY": BCOV_POLICY}
 
 
@@ -155,16 +155,19 @@ async def career_will(app, message):
         return
 
     headers = {
-                "Host": "wbspec.crwilladmin.com",
-                "appver": "101",
-                "apptype": "android",
-        "usertype": "2",
-        "token": token,
-                "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
-                "content-type": "application/json; charset=UTF-8",
-                "accept-encoding": "gzip",
-                "user-agent": "okhttp/5.0.0-alpha.2"
-    }
+    "Host": "wbspec.crwilladmin.com",
+    "accept": "application/json",
+    "content-type": "application/json; charset=UTF-8",
+    "user-agent": "Dalvik/2.1.0 (Linux; U; Android 13; RMX3710 Build/TKQ1.220829.002)",
+    "appver": "126",
+    "versioncode": "126",
+    "apptype": "android",
+    "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
+    "deviceid": "android",
+    "devicemodel": "RMX3710",
+    "deviceversion": "13",
+    "accept-encoding": "gzip"
+}
 
     await input1.delete(True)
     batch_url = "https://wbspec.crwilladmin.com/api/v1//my-batch"
