@@ -108,12 +108,12 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 async def career_will(app, message):
     try:
         input1 = await app.ask(message.chat.id, text="<blockquote>**Send ID & Password in this manner otherwise bot will not respond.\n\nSend like this:-  ID*Password\n\n OR Send Your Token**</blockquote>")
-        login_url = "https://elearn.crwilladmin.com/api/v8/login-other"
+        login_url = "https://wbspec.crwilladmin.com/api/v1/login-other"
         raw_text = input1.text
      
         if "*" in raw_text:
             headers =  {
-                "Host": "elearn.crwilladmin.com",
+                "Host": "wbspec.crwilladmin.com",
                 "appver": "101",
                 "apptype": "android",
                 "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
@@ -133,7 +133,7 @@ async def career_will(app, message):
                 "deviceToken": "c8HzsrndRB6dMaOuKW2qMS:APA91bHu4YCP4rqhpN3ZnLjzL3LuLljxXua2P2aUXfIS4nLeT4LnfwWY6MiJJrG9XWdBUIfuA6GIXBPIRTGZsDyripIXoV1CyP3kT8GKuWHgGVn0DFRDEnXgAIAmaCE6acT3oussy2"  # Replace with an actual device token if needed
             }
 
-            response = requests.post("https://elearn.crwilladmin.com/api/v8/login-other", headers=headers, json=data)
+            response = requests.post("https://wbspec.crwilladmin.com/api/v1/login-other", headers=headers, json=data)
             
             pk = response.text
             response.raise_for_status()  # Raise an error if the request was unsuccessful
