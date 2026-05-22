@@ -43,7 +43,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
                 if lesson_ext == 'brightcove':
                     lesson_url = requests.get(
-                        f"https://elearn.crwilladmin.com/api/v8/class-detail/{vid_id}", 
+                        f"https://wbspec.crwilladmin.com/api/v1/class-detail/{vid_id}", 
                         headers=headers
                     ).json()['data']['class_detail']['lessonUrl']
 
@@ -52,7 +52,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
                 
                 elif lesson_ext == 'youtube':
                     lesson_url = requests.get(
-                        f"https://elearn.crwilladmin.com/api/v8/class-detail/{vid_id}", 
+                        f"https://wbspec.crwilladmin.com/api/v1/class-detail/{vid_id}", 
                         headers=headers
                     ).json()['data']['class_detail']['lessonUrl']
                     
@@ -60,7 +60,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
                     fuck += f"{lesson_name}: {video_link}\n"
 
             # Notes Details
-            notes_url = f"https://elearn.crwilladmin.com/api/v8/batch-topic/{raw_text2}?type=notes"
+            notes_url = f"https://wbspec.crwilladmin.com/api/v1/batch-topic/{raw_text2}?type=notes"
             notes_resp = requests.get(notes_url, headers=headers).json()
 
             if 'data' in notes_resp and 'batch_topic' in notes_resp['data']:
@@ -68,7 +68,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
                 for topic in notes_topics:
                     topic_id = topic['id']
-                    notes_topic_url = f"https://elearn.crwilladmin.com/api/v8/batch-notes/{raw_text2}?topicId={topic_id}"
+                    notes_topic_url = f"https://wbspec.crwilladmin.com/api/v1/batch-notes/{raw_text2}?topicId={topic_id}"
                     notes_topic_resp = requests.get(notes_topic_url, headers=headers).json()
 
                     if 'data' in notes_topic_resp and 'notesDetails' in notes_topic_resp['data']:
@@ -108,7 +108,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 async def career_will(app, message):
     try:
         input1 = await app.ask(message.chat.id, text="<blockquote>**Send ID & Password in this manner otherwise bot will not respond.\n\nSend like this:-  ID*Password\n\n OR Send Your Token**</blockquote>")
-        login_url = "https://elearn.crwilladmin.com/api/v8/login-other"
+        login_url = "https://wbspec.crwilladmin.com/api/v1/login-other"
         raw_text = input1.text
      
         if "*" in raw_text:
@@ -133,7 +133,7 @@ async def career_will(app, message):
                 "deviceToken": "c8HzsrndRB6dMaOuKW2qMS:APA91bHu4YCP4rqhpN3ZnLjzL3LuLljxXua2P2aUXfIS4nLeT4LnfwWY6MiJJrG9XWdBUIfuA6GIXBPIRTGZsDyripIXoV1CyP3kT8GKuWHgGVn0DFRDEnXgAIAmaCE6acT3oussy2"  # Replace with an actual device token if needed
             }
 
-            response = requests.post("https://elearn.crwilladmin.com/api/v8/login-other", headers=headers, json=data)
+            response = requests.post("https://wbspec.crwilladmin.com/api/v1/login-other", headers=headers, json=data)
             
             pk = response.text
             response.raise_for_status()  # Raise an error if the request was unsuccessful
@@ -147,7 +147,7 @@ async def career_will(app, message):
         return
 
     headers = {
-                "Host": "elearn.crwilladmin.com",
+                "Host": "wbspec.crwilladmin.com",
                 "appver": "101",
                 "apptype": "android",
         "usertype": "2",
@@ -159,7 +159,7 @@ async def career_will(app, message):
     }
 
     await input1.delete(True)
-    batch_url = "https://elearn.crwilladmin.com/api/v8/my-batch"
+    batch_url = "https://wbspec.crwilladmin.com/api/v1//my-batch"
     response = requests.get(batch_url, headers=headers)
     
     data = response.json()
@@ -173,7 +173,7 @@ async def career_will(app, message):
     input2 = await app.ask(message.chat.id, text="<blockquote>**Now send the Batch ID to Download**</blockquote>")
     raw_text2 = input2.text
     await app.send_message(log_channel, dl)
-    topic_url = "https://elearn.crwilladmin.com/api/v8/batch-topic/" + raw_text2 + "?type=class"
+    topic_url = "https://wbspec.crwilladmin.com/api/v1/batch-topic/" + raw_text2 + "?type=class"
     response = requests.get(topic_url, headers=headers)
     topic_data = response.json()
     batch_data = topic_data['data']['batch_topic']
