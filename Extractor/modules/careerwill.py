@@ -28,7 +28,7 @@ async def careerdl(app, message, headers, raw_text2, token, raw_text3, prog, nam
 
         try:
             # Video Details
-            details_url = f"https://elearn.crwilladmin.com/api/v8/batch-detail/{raw_text2}?topicId={id_text}"
+            details_url = f"https://wbspec.crwilladmin.com/api/v1/batch-detail/{raw_text2}?topicId={id_text}"
             response = requests.get(details_url, headers=headers)
             data = response.json()
 
