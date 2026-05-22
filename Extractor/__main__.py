@@ -9,24 +9,24 @@ from pyrogram import idle
 from Extractor.modules import ALL_MODULES
 
 # =========================
-# WEB SERVER FOR KOYEB
+# KOYEB HEALTH SERVER
 # =========================
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot is Running Successfully!"
+    return "Bot Running Successfully!"
 
 def run_web():
     port = int(os.environ.get("PORT", 8000))
     app.run(host="0.0.0.0", port=port)
 
-# Background me web server start
+# Start web server in background
 Thread(target=run_web).start()
 
 # =========================
-# BOT
+# BOT START
 # =========================
 
 loop = asyncio.get_event_loop()
