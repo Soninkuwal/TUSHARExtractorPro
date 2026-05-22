@@ -1,19 +1,19 @@
 """
-'''
+
 from os import getenv
 
 
-API_ID = int(getenv("API_ID", "20937734"))
-API_HASH = getenv("API_HASH", "1db7bdcf908100cc641c6a5276765c3d")
+API_ID = int(getenv("API_ID", ""))
+API_HASH = getenv("API_HASH", "")
 BOT_TOKEN = getenv("BOT_TOKEN", "")
-OWNER_ID = int(getenv("OWNER_ID", "5121141243"))
-SUDO_USERS = list(map(int, getenv("SUDO_USERS", "5121141243").split()))
-MONGO_URL = getenv("MONGO_DB", "mongodb+srv://wadiro6523:08AwfhhKRdQaS1i6@cluster0.krzxuop.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+OWNER_ID = int(getenv("OWNER_ID", ""))
+SUDO_USERS = list(map(int, getenv("SUDO_USERS", "").split()))
+MONGO_URL = getenv("MONGO_DB", "")
 
-CHANNEL_ID = int(getenv("CHANNEL_ID", "-1002226641720"))
-PREMIUM_LOGS = int(getenv("PREMIUM_LOGS", "-1002226641720")) "22746239"))
-API_HASH = environ.get("API_HASH", "a98ec8cfd8572a3a7c936cf828fe6215")
-'''
+CHANNEL_ID = int(getenv("CHANNEL_ID", ""))
+PREMIUM_LOGS = int(getenv("PREMIUM_LOGS", "")) "22746239"))
+API_HASH = environ.get("API_HASH", "")
+
 """
 
 
