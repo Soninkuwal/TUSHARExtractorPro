@@ -113,7 +113,7 @@ async def career_will(app, message):
      
         if "*" in raw_text:
             headers =  {
-                "Host": "elearn.crwilladmin.com",
+                "Host": "wbspec.crwilladmin.com",
                 "appver": "101",
                 "apptype": "android",
                 "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
