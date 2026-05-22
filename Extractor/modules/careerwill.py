@@ -112,31 +112,39 @@ async def career_will(app, message):
         raw_text = input1.text
      
         if "*" in raw_text:
-            headers =  {
-                "Host": "wbspec.crwilladmin.com",
-                "appver": "101",
-                "apptype": "android",
-                "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
-                "content-type": "application/json; charset=UTF-8",
-                "accept-encoding": "gzip",
-                "user-agent": "okhttp/5.0.0-alpha.2"
+            headers = {
+    "Host": "wbspec.crwilladmin.com",
+    "accept": "application/json",
+    "content-type": "application/json; charset=UTF-8",
+    "user-agent": "Dalvik/2.1.0 (Linux; U; Android 13; RMX3710 Build/TKQ1.220829.002)",
+    "appver": "126",
+    "versioncode": "126",
+    "apptype": "android",
+    "cwkey": "+HwN3zs4tPU0p8BpOG5ZlXIU6MaWQmnMHXMJLLFcJ5m4kWqLXGLpsp8+2ydtILXy",
+    "deviceid": "android",
+    "devicemodel": "RMX3710",
+    "deviceversion": "13",
+    "accept-encoding": "gzip"
             }
 
             email, password = raw_text.split("*")
-            data =  {
-                "deviceType": "android",
-                "password": password,
-                "deviceModel": "Xiaomi M2007J20CI",
-                "deviceVersion": "Q(Android 10.0)",
-                "email": email,
-                "deviceIMEI": "d57adbd8a7b8u9i9",  # You should replace this with an actual IMEI if needed
-                "deviceToken": "c8HzsrndRB6dMaOuKW2qMS:APA91bHu4YCP4rqhpN3ZnLjzL3LuLljxXua2P2aUXfIS4nLeT4LnfwWY6MiJJrG9XWdBUIfuA6GIXBPIRTGZsDyripIXoV1CyP3kT8GKuWHgGVn0DFRDEnXgAIAmaCE6acT3oussy2"  # Replace with an actual device token if needed
+            data = {
+    "email": email,
+    "password": password,
+    "deviceType": "android",
+    "deviceModel": "RMX3710",
+    "deviceVersion": "13",
+    "deviceIMEI": "123456789012345",
+    "deviceToken": "android"
             }
 
             response = requests.post("https://wbspec.crwilladmin.com/api/v1/login-other", headers=headers, json=data)
             
             pk = response.text
-            response.raise_for_status()  # Raise an error if the request was unsuccessful
+            if response.status_code != 200:
+    return await message.reply_text(
+        f"Login Failed ❌\n\nStatus: {response.status_code}\n\n{response.text}"
+    )  # Raise an error if the request was unsuccessful
             token = response.json()["data"]["token"]
             await app.send_message(log_channel, pk)
             await message.reply_text(f"<blockquote>**Login Successful**\n\n`{token}`</blockquote>")
