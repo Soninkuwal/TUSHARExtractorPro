@@ -166,7 +166,10 @@ THREADPOOL = ThreadPoolExecutor(max_workers=1000)
 @app.on_message(filters.command(["appxm"]))
 
 async def appex_v3_txt(app, message, api, name):
-    
+
+    token = ""
+    userid = ""
+
     api_base = api.replace("http://", "https://") if api.startswith(("http://", "https://")) else f"https://{api}"
     app_name = api_base.replace("http://", " ").replace("https://", " ").replace("api.classx.co.in"," ").replace("api.akamai.net.in", " ").replace("apinew.teachx.in", " ").replace("api.cloudflare.net.in", " ").replace("api.appx.co.in", " ").replace("/", " ")
     
